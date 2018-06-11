@@ -25,6 +25,8 @@ RUN \
     echo "PS1='Docker\$ '" >/etc/profile.d/$course.sh &&\
     echo 'export PATH="$PATH:/home/'$course'/bin":/home/'$course/public_html/$session/scripts:. >>/etc/profile.d/$course.sh &&\
     echo "export LC_COLLATE=POSIX" >>/etc/profile.d/$course.sh &&\
+    echo '#!/bin/sh' >/usr/local/bin/1511 &&\
+    echo 'PATH=/home/cs1511/bin:$PATH exec "$@"' >>/usr/local/bin/1511 &&\
     adduser --disabled-password --gecos '' --home  /home/$course $course &&\
     mkdir -p /home/$course/public_html/$session/scripts /web /home/$course/bin &&\
     ln -s  /home/$course/public_html /web/$course &&\
@@ -34,7 +36,7 @@ RUN \
     ln -sf $public_html_session_directory/scripts/give_remote /home/$course/bin/give &&\
     echo '#!/bin/sh' >/home/$course/bin/gcc &&\
     echo 'exec clang "$@"' >>/home/$course/bin/gcc &&\
-    chmod -R 755 /web /home &&\
+    chmod -R 755 /web /home /usr/local/bin/1511 &&\
     chown -R $course.$course /web /home &&\
     date +'@%s.%N' >$public_html_session_directory/.docker_image_creation_time &&\
     date +'@%s.%N' >$public_html_session_directory/.last_autotest_file_update_time &&\
@@ -42,7 +44,7 @@ RUN \
     tar -C $public_html_session_directory --owner=$course -xJf - &&\
     chmod -R 755 /web /home &&\
     chown -R $course.$course /web /home &&\
-    echo 55
+    echo 61
 
 ADD /entrypoint entrypoint
 ENTRYPOINT ["/entrypoint"]
