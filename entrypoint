@@ -3,7 +3,8 @@
 unset DEBIAN_FRONTEND
 
 cd /root
-export PATH=$PATH:/home/cs1511/public_html/scripts:.
+PATH=$PATH:/home/cs1511/public_html/18s1/scripts:.
+export PATH
 
 # Test if we have some files in /root - 
 if test -z "`ls /root 2>/dev/null`"
@@ -13,7 +14,7 @@ then
 No files in /root
 You need to mount a directory on /root for example:
 
-docker run -it -v /C/users/andrewt:/root comp1511/sh
+docker run -it -v /C/users/andrewt:/root --cap-add=SYS_PTRACE comp1511/sh
 
 eof
 else
@@ -47,7 +48,7 @@ eof
         cat <<eof
 You don't seem to have a ssh key.
 
-If this your own computer you might like to create a ssh key
+If this is your own computer you might like to create a ssh key
 by running this command (just hit return for the questions):
 
 ssh-keygen

@@ -9,4 +9,4 @@ All the command-line tools & scripts needed for [COMP1511](http://cse.unsw.edu.a
 
 Run like this:
 
-`docker run -it -v /c/Users/andrewt:/root comp1511/sh`
+`docker run -it --cap-add=SYS_PTRACE -v /c/Users/andrewt:/root comp1511/sh`
