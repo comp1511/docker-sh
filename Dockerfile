@@ -42,7 +42,7 @@ RUN \
     tar -C $public_html_session_directory --owner=$course -xJf - &&\
     chmod -R 755 /web /home &&\
     chown -R $course.$course /web /home &&\
-    echo 54
+    echo 55
 
 ADD /entrypoint entrypoint
 ENTRYPOINT ["/entrypoint"]
